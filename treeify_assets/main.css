@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 15px;
+  font-size: 20px;
+}
+
+li {
+  margin: 10px;
+}
+
+li > button {
+  float: left;
+}
+
+button {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 195);
+}
+
+header {
+  height: 10vh;
+  width: 100vw;
+}
+
+#tree-viewer {
+  height: 90vh;
+  width: 100vw;
+}
+
+#file-viewer {
+  height: 90vh;
+  width: 100vw;
+}
+
+#file-viewer > iframe {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.directory {
+  font-weight: 700;
+}
+
+li.file {
+  font-weight: 400;
+}
+
+.collapsed {
+  display: none;
+}
