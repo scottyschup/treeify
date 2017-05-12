@@ -47,8 +47,8 @@ class IndexBuilder
 
   def add_files(dir)
     # TODO: add file size info; potentially return agg size too for dir size
-    result = %x(ls '#{dir}' 2>&1)
-    unless $? == 0
+    result = `ls '#{dir}' 2>&1`
+    unless $?.success?
       puts "Error (in add_subdirs_and_files) while processing: #{dir}"
     end
 
@@ -65,9 +65,9 @@ class IndexBuilder
   end
 
   def add_iframe
-    @output += "<div id=\"file-viewer\">"
-    @output += "<button id=\"show-tree\">Back to Tree View</button>"
-    @output += "<iframe name=\"file-viewer\" src=\"\"></iframe></div>"
+    @output += '<div id="file-viewer">'
+    @output += '<button id="show-tree">Back to Tree View</button>'
+    @output += '<iframe name="file-viewer" src=""></iframe></div>'
   end
 
   def add_subdir(dir, subdir)
@@ -80,8 +80,8 @@ class IndexBuilder
   end
 
   def add_subdirs_and_files(dir)
-    result = %x(ls '#{dir}' 2>&1)
-    unless $? == 0
+    result = `ls '#{dir}' 2>&1`
+    unless $?.success?
       puts "Error (in add_subdirs_and_files) while processing: #{dir}"
     end
 
@@ -89,7 +89,7 @@ class IndexBuilder
       File.directory?("#{dir}/#{item}")
     end
 
-    @output += "<ul id=\"root\">"
+    @output += '<ul id="root">'
     subdirs.each do |subdir|
       subdir.gsub!(' ', '\ ')
       add_subdir(dir, subdir)
@@ -103,14 +103,14 @@ class IndexBuilder
   end
 
   def add_top_html
-    @output = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">"
-    @output += "<title>Tree Index for #{@root_dir}</title>"
-    @output += "<link rel=\"stylesheet\" type=\"text/css\" href=\"./treeify_assets/main.css\" />"
-    @output += "</head><body>"
+    @output = '<!DOCTYPE html><html><head><meta charset="utf-8">'
+    @output += '<title>Tree Index for #{@root_dir}</title>'
+    @output += '<link rel="stylesheet" type="text/css" href="./treeify_assets/main.css" />'
+    @output += '</head><body>'
   end
 
   def index_file_exists?
-    File.exists?("#{@root_dir}/index.html")
+    File.exist?("#{@root_dir}/index.html")
   end
 
   def overwrite_index?
@@ -119,17 +119,16 @@ class IndexBuilder
   end
 
   def progress_report
-    if (Time.now - @last_update) > 2
-      puts "Directories processed: #{@dir_count}"
-      puts "Files processed: #{@file_count}"
-      @last_update = Time.now
-    end
+    return unless (Time.now - @last_update) > 2
+    puts "Directories processed: #{@dir_count}"
+    puts "Files processed: #{@file_count}"
+    @last_update = Time.now
   end
 
   def write_files
     File.write("#{@root_dir}/#{@output_file}", @output)
     if File.exist?("#{@root_dir}/treeify_assets")
-      puts "treeify_assets directory already exists"
+      puts 'treeify_assets directory already exists'
     else
       `cp -r ./treeify_assets #{@root_dir}`
     end
@@ -145,7 +144,26 @@ if $PROGRAM_NAME == __FILE__
   else
     puts 'Provide path for target directory:'
     resp = gets.chomp
-    root = resp[0] == '/' ? resp : Dir.pwd + '/' + resp
+    root =
+      case resp[0]
+      when '/'
+        resp
+      when '~'
+        `echo ~`.chomp
+      when '.'
+        if resp[1] == '/'
+          Dir.pwd + resp[1..-1]
+        elsif resp[1] == '.'
+          until resp[0] != '.'
+            dir = (dir || Dir.pwd).split('/')[0...-1].join('/')
+            resp = resp.split('/')[1..-1].join('/')
+          end
+          "#{dir}/#{resp}"
+        end
+      else
+        Dir.pwd + '/' + resp
+      end
+
     ib = IndexBuilder.new(root: root)
   end
 
