@@ -5,25 +5,21 @@ I don't really know how to describe this thing. It's like a file system viewer b
 ## Overview
 
 Once the script has been run, you will have an index.html file in the root directory you selected. Opening that file in a browser you will see the collapsed tree-view of the directory.
-
 <kbd>
 <img alt-text="Collapsed tree-view" src="imgs/tree_view_collapsed.png">
 </kbd>
 
 To see more detail, you can click the Expand All button.
-
 <kbd>
 <img alt-text="Expanded tree-view" src="imgs/tree_view_expanded.png">
 </kbd>
 
 Clicking on a file opens the document view.
-
 <kbd>
 <img alt-text="Text doc-view" src="imgs/doc_view_text.png">
 </kbd>
 
 Because the document view is an `iframe`, files like PDFs will be displayed the same way your browser usually displays them without leaving the Treeify-generated index page.
-
 <kbd>
 <img alt-text="PDF doc-view" src="imgs/doc_view_pdf.png">
 </kbd>
