@@ -4,12 +4,12 @@ I don't really know how to describe this thing. It's like a file system viewer b
 
 ## Overview
 
-Once the script has been run, you will have an index.html file in the root directory you selected. Opening that file in a browser you will see the collapsed tree-view of the directory.
+Once the script has been run, you will have an `index.html` file in the root directory you selected. Opening that file in a browser you will see the collapsed tree-view of the directory.
 <kbd>
 <img alt-text="Collapsed tree-view" src="imgs/tree_view_collapsed.png">
 </kbd>
 
-To see more detail, you can click the Expand All button.
+To see more detail, you can click the `Expand All` button.
 <kbd>
 <img alt-text="Expanded tree-view" src="imgs/tree_view_expanded.png">
 </kbd>
