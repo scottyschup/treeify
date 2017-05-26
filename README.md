@@ -1,6 +1,6 @@
 # Treeify
 
-I don't really know how to describe this thing. It's like a file system viewer but also a file viewer that can be run in any directory on a server (which is accessible via browser) to make interaction with that directory more OS like. It was just a fun little project to help out a friend.
+I don't really know how to describe this thing. It's like a file system viewer but also a file viewer that can be run in any directory on a server (which is accessible via browser) to make interaction with that directory more OS-like. It's just a fun little project that I started to help out a friend.
 
 ## Overview
 
@@ -19,7 +19,7 @@ Clicking on a file opens the document view.
 <img alt-text="Text doc-view" src="imgs/doc_view_text.png">
 </kbd>
 
-Because the document view is an `iframe`, files like PDFs will be displayed the same way your browser usually displays them without leaving the Treeify-generated index page.
+Because the document view is an `iframe`, files like PDFs will be displayed the same way your browser usually displays them, but without leaving the Treeify-generated index page.
 <kbd>
 <img alt-text="PDF doc-view" src="imgs/doc_view_pdf.png">
 </kbd>
@@ -41,3 +41,19 @@ Basically you can run this as-is from the command line, or you have to go throug
 I was going to put all that info here, but it's already been done. Just follow [these instructions](https://www.commandercoriander.net/blog/2013/02/16/making-a-ruby-script-executable/).
 
 I'm not 100% sure that it will work correctly as a shell script, but I kind of expect that it will.
+
+## Next Steps
+
+#### Short-term
+
+* Fix known bugs
+* Pretty it up a bit with some CSS
+* Package as a gem
+
+#### Long-term
+
+* Add more interactive features like
+  * upload/download
+  * delete
+  * edit, possibly via VIM, or just a simple form for plain text
+* Determine best/cleanest way to move CSS/JS portions elsewhere (maybe ~?) so treeify_assets is no longer needed in root directory and doesn't need to be written to multiple locations if Treeify is run multiple times for different directories
