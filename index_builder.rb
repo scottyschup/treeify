@@ -167,7 +167,7 @@ if $PROGRAM_NAME == __FILE__
     ib = IndexBuilder.new(root: root)
   end
 
-  puts 'Use absolute or relative paths for file links? (a/r)'
-  relative = gets[0].downcase == 'r'
+  # puts 'Use absolute or relative paths for file links? (a/r)'
+  relative = true # gets[0].downcase == 'r'
   ib.build_index(relative_links: relative)
 end
